@@ -1,0 +1,28 @@
+{
+  "name": "pxobot-discord",
+  "version": "0.0.1",
+  "description": "This is a discord bot that does things.",
+  "main": "bot.js",
+  "dependencies": {
+    "discord-akairo": "^8.1.0",
+    "discord.js": "^12.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://mookman288@github.com/mookman288/pxobot-discord.git"
+  },
+  "keywords": [
+    "discord",
+    "bot"
+  ],
+  "author": "PxO Ink LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mookman288/pxobot-discord/issues"
+  },
+  "homepage": "https://github.com/mookman288/pxobot-discord#readme"
+}

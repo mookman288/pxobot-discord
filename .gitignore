@@ -24,6 +24,7 @@
 *.psd
 *.sublime-project
 *.sublime-workspace
+config.json
 
 # OS / Network
 [Tt]humbs.db*
