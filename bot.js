@@ -1,7 +1,7 @@
 global.__basedir = __dirname;
 global.__config = require(__basedir + '/config.json');
 
-const { PxOClient } = require('src/client.js');
+const { PxOClient } = require(__basedir + '/src/client.js');
 
 const client = new PxOClient();
 

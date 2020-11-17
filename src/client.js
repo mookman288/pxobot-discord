@@ -1,4 +1,4 @@
-const { AkairoClient } = require('discord-akairo');
+const { AkairoClient, CommandHandler } = require('discord-akairo');
 
 class PxOClient extends AkairoClient {
 	constructor() {
@@ -17,4 +17,4 @@ class PxOClient extends AkairoClient {
 	}
 }
 
-module.exports = PxOClient;
+module.exports = { PxOClient };
