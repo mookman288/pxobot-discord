@@ -5,4 +5,6 @@ const { PxOClient } = require(__basedir + '/src/client.js');
 
 const client = new PxOClient();
 
-client.login(__config.token);
+client.login(__config.token).then(() => {
+	console.log('Logged in and running.');
+});

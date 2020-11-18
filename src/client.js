@@ -3,14 +3,15 @@ const { AkairoClient, CommandHandler } = require('discord-akairo');
 class PxOClient extends AkairoClient {
 	constructor() {
 		super({
-			ownerID: ''
+			ownerID: __config.ownerID
 		}, {
 			disableMentions: 'everyone'
 		});
 
 		this.commandHandler = new CommandHandler(this, {
-			directory: path.join(__basedir, '/src/commands'),
-			prefix: __config.prefix
+			directory: __basedir + '/src/commands',
+			prefix: __config.prefix,
+			defaultCooldown: 2500
 		});
 
 		this.commandHandler.loadAll();
