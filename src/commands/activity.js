@@ -1,5 +1,6 @@
 const { Command } = require('discord-akairo');
 const Sugar = require('sugar');
+let error = false;
 
 class ActivityCommand extends Command {
 	constructor() {
@@ -14,7 +15,7 @@ class ActivityCommand extends Command {
 		}
 
 		const args = message.content.slice(__config.prefix.length).trim().split(' ').slice(1).join(' ');
-		const dateFrom = (args.length > 0) ? new Sugar.Date.create(args) : null;
+		const dateFrom = (args.length > 0) ? new Sugar.Date(args) : null;
 		let fields = [];
 
 		if (args.length < 1 && !dateFrom) {
@@ -28,6 +29,8 @@ class ActivityCommand extends Command {
 
 			//https://stackoverflow.com/a/57190304/1617361
 			let search = (channel, user, before) => {
+				if (error) return;
+
 				const limit = 50;
 				const options = {
 					limit: 50
@@ -37,16 +40,16 @@ class ActivityCommand extends Command {
 					options.before = before;
 				}
 
-				channel.fetchMessages(options).then((messages) => {
+				channel.messages.fetch(options).then((messages) => {
 					if (messages.size !== 0) {
-						const messageDate = new Sugar.Date.create(messages.first().createdAt);
+						const messageDate = new Sugar.Date(messages.first().createdAt);
 
 						if (dateFrom.isAfter(messageDate)) {
 							messages.find((msg) => {
 								if (msg.author.id === user.id) {
-									user.lastMessage = {
+									user.__lastMessage = {
 										id: search.id,
-										createdAt: new Sugar.Date.create(msg.createdAt).full()
+										createdAt: new Sugar.Date(msg.createdAt).full()
 									};
 
 									message.author.send({
@@ -55,7 +58,7 @@ class ActivityCommand extends Command {
 											title: 'Activity Search - ' + Math.floor((count / total) * 100) + '% Complete',
 											fields: {
 												name: user.username,
-												value: user.lastMessage.createdAt
+												value: user.__lastMessage.createdAt
 											}
 										}
 									});
@@ -65,6 +68,12 @@ class ActivityCommand extends Command {
 							});
 						}
 					}
+				}).catch((err) => {
+					console.log(err);
+
+					error = true;
+
+					return message.reply('There was an error when I attempted to search past messages.');
 				});
 			};
 

@@ -9,16 +9,19 @@ class HelpCommand extends Command {
 
 	exec(message) {
 		const commands = {
-			'activity <date>': 'Lists the users who have been inactive since the date supplied in a private message.',
+			'8ball': 'Provides an answer to your most sought after questions.',
+			'activity <date-ish>': 'Lists the users who have been inactive since the date supplied in a private message.',
 			'author': 'Provides information about who created this bot.',
+			'goodbot': 'Praise me! If you want to reach out to, or maybe tip, my creator, use the `author` command.',
 			'help': 'Lists all of the commands available in a private message.',
-			'ping <message>': 'Tests whether the bot is functioning.'
+			'ping <message>': 'Tests whether the bot is functioning.',
+			'roll <number>d<number>(+ modifier)': 'Simple dice roller.'
 		}
 		let fields = [];
 
 		for (const [command, description] of Object.entries(commands)) {
 			fields.push({
-				name: '`' + command + '`',
+				name: '`' + __config.prefix + command + '`',
 				value: description
 			});
 		}
